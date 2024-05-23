@@ -24,3 +24,42 @@ root.left = TreeNode(4)
 root.right = TreeNode(5)
 sol = Solution()
 print(sol.checkTree(root))
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.animation as animation
+
+# Set up the figure and axis
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.set_xlim(0, 10)
+ax.set_ylim(-2, 2)
+ax.set_xlabel('Time (s)')
+ax.set_ylabel('Value')
+ax.set_title('Dynamic Plot')
+
+# Create a line object to be updated
+line, = ax.plot([], [], lw=2)
+
+# Define the function to update the plot
+def animate(i):
+    t = np.linspace(0, 10, 100)
+    y = np.sin(2 * np.pi * t - 0.01 * i)
+    line.set_data(t, y)
+    return line
+
+# Create the animation
+ani = animation.FuncAnimation(fig, animate, frames=100, interval=50, blit=True)
+
+# Add zoom functionality
+def zoom(event):
+    if event.button == 'up':
+        ax.set_xlim(ax.get_xlim()[0] - 1, ax.get_xlim()[1] + 1)
+        ax.set_ylim(ax.get_ylim()[0] - 0.5, ax.get_ylim()[1] + 0.5)
+    elif event.button == 'down':
+        ax.set_xlim(ax.get_xlim()[0] + 1, ax.get_xlim()[1] - 1)
+        ax.set_ylim(ax.get_ylim()[0] + 0.5, ax.get_ylim()[1] - 0.5)
+    fig.canvas.draw()
+
+fig.canvas.mpl_connect('scroll_event', zoom)
+
+# Display the plot
+plt.show()

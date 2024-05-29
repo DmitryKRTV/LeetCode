@@ -49,3 +49,4 @@ class Solution:
             max_l = max(max_l, right - left + 1)
         
         return max_l
+    

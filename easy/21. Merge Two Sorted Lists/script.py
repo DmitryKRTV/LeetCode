@@ -13,22 +13,22 @@ class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
         t1 = list1
         t2 = list2
-        res = ListNode(0)
-        tmp = res
+        head = ListNode(0)
+        chain = head
 
         while t1 != None and t2 != None:
             if t1.val < t2.val:
-                tmp.next = t1
+                chain.next = t1
                 t1 = t1.next
             else:
-                tmp.next = t2
+                chain.next = t2
                 t2 = t2.next
             
-            tmp = tmp.next
+            chain = chain.next
 
         if t1 != None:
-            tmp.next = t1
+            chain.next = t1
         if t2 != None:
-            tmp.next = t2
+            chain.next = t2
     
-        return res.next
+        return head.next
